@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --font-script: "Marck Script", cursive;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --color-plum: #2a0f24;
+  --color-plum-2: #3d1634;
+  --color-pomegranate: #b3294e;
+  --color-peony: #f2a1b5;
+  --color-champagne: #f1d9a7;
+  --color-blush: #f8e6e9;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--color-plum);
+  color: #fff4ea;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-bg {
+  background:
+    radial-gradient(ellipse at 25% 20%, #5a1d44 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 90%, #7a1f45 0%, transparent 55%),
+    #2a0f24;
+}
+
+.finale-bg {
+  background: linear-gradient(180deg, #2a0f24 0%, #5a1d44 55%, #8a2350 100%);
+}
+
+.glow-title {
+  text-shadow: 0 0 30px rgba(242, 161, 181, 0.55), 0 0 80px rgba(179, 41, 78, 0.5);
+}
+
+/* falling petals (hero only) */
+.petal {
+  position: absolute;
+  top: -8%;
+  border-radius: 150% 0 150% 0;
+  background: linear-gradient(135deg, #f2a1b5, #b3294e);
+  opacity: 0.65;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+@keyframes fall {
+  0%   { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+  100% { transform: translate3d(var(--drift, 0px), 115vh, 0) rotate(560deg); }
+}
+
+/* the one pulsing heart */
+.heartbeat { animation: beat 1.6s ease-in-out infinite; transform-origin: center; }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.14); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.09); }
+  70% { transform: scale(1); }
+}
+
+/* letter paragraphs fade in as you read */
+.reveal { opacity: 0; transition: opacity 1.3s ease; }
+.reveal.in { opacity: 1; }
+
+.no-scrollbar { scrollbar-width: thin; scrollbar-color: #b3294e transparent; }
+
+:focus-visible { outline: 2px solid #f1d9a7; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .petal, .heartbeat { animation: none; }
+  .reveal { opacity: 1; transition: none; }
+}
